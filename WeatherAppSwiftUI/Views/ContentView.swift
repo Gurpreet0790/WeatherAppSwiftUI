@@ -17,26 +17,29 @@ struct ContentView: View {
         VStack {
             
             if let location = locationManger.location {
-              if let weather = weather
+                if let weather = weather
                 {
-                    Text("Weather data fetched")
+                    WeatherView(weather: weather)
                 }
                 else{
+                    //Get User Current Location
                     LoadingView()
                         .task{
                             do{
-                           weather =  try await weatherManager.getCurrentWeather(latitude: location.latitude, longitude: location.longitude)
+                                weather =  try await weatherManager.getCurrentWeather(latitude: location.latitude, longitude: location.longitude)
+                                
                                 
                             } catch { print("Getting Error")}
                         }
                 }
             } else {
+                //Show Loader
                 if locationManger.isLoading {
                     LoadingView()
                     
                 } else {
                     WelcomeView()
-                           .environmentObject(locationManger)
+                        .environmentObject(locationManger)
                 }
             }
         }
@@ -48,7 +51,3 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-//Image(systemName: "globe")
-//    .imageScale(.large)
-//    .foregroundStyle(.tint)
-//Text("Hello, world!")

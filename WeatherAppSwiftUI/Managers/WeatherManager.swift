@@ -22,6 +22,7 @@ class WeatherManager {
             
         let decodedData = try JSONDecoder().decode(ResponseBody.self, from: data)
         
+        print("decodedData is",decodedData)
          return decodedData
         }
     }
@@ -48,7 +49,7 @@ struct ResponseBody: Decodable {
     struct MainResponse: Decodable{
         var temp: Double
         var feels_like: Double
-        var temp_main: Double
+        var temp_min: Double
         var temp_max: Double
         var pressure: Double
         var humidity: Double
@@ -59,3 +60,12 @@ struct ResponseBody: Decodable {
         var deg: Double
     }
 }
+
+extension ResponseBody.MainResponse {
+    var feelsLike: Double { return feels_like }
+    var tempMin: Double { return temp_min }
+    var tempMax: Double { return temp_max }
+}
+
+//https://api.openweathermap.org/data/2.5/weather?lat=12.123456&lon=98.987654&appid=02d9435bf601348c77dff2bba350e20e
+//https://api.openweathermap.org/data/2.5/weather?q=New%20York&aapid=02d9435bf601348c77dff2bba350e20e

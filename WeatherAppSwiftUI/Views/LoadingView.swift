@@ -9,8 +9,10 @@ import SwiftUI
 
 struct LoadingView: View {
     var body: some View {
-        
+        //Loader View
         ProgressView()
+            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
